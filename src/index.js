@@ -6,7 +6,8 @@ class App extends React.Component{
         super(props); // reference to parent constructor function
         
         // THIS IS THE ONLY TIME WE DO DIRECT ASSIGNMENT TO this.state
-        this.state = {lat: null};
+        this.state = {lat: null,
+                        errorMessage: ''};
 
         // Get user's current location
         window.navigator.geolocation.getCurrentPosition(
@@ -14,12 +15,19 @@ class App extends React.Component{
                 // Setting State
                 this.setState({lat: position.coords.latitude});
             },
-            (err) => console.log(err)
+            (err) => {
+                this.setState({errorMessage: err.message});
+            }
         );
     }
     
     render() { 
-        return <div>Latitude: {this.state.lat}</div>;
+        return (
+            <div>
+                Latitude: {this.state.lat}
+                <br/>
+                Error: {this.state.errorMessage}</div>
+        )
     }
 }
 
