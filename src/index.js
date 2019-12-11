@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
 
 class App extends React.Component{
     // state initialization
     state = {lat: null, errorMessage: ''};
 
+    // this is a bit similar to onStart in android dev
     componentDidMount() {
         // Get user's current location
         window.navigator.geolocation.getCurrentPosition(
@@ -29,7 +31,7 @@ class App extends React.Component{
         };
 
         if (!this.state.errorMessage && this.state.lat) {
-            return <div>Lat: {this.state.lat}</div>;
+            return <SeasonDisplay lat = {this.state.lat} />
         }
 
         return <div>Loading!</div>
